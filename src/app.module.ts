@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
-import { MongooseModule } from '@nestjs/mongoose';
+import { DatabaseModule } from './database/database.module';
+
+import { UsersModule } from './modules/users/users.module';
 
 @Module({
-  imports: [
-    MongooseModule.forRoot('mongodb+srv://hyper4:hyper4123@webprojectscluster.rdtsnfh.mongodb.net/NestRestAPI?retryWrites=true&w=majority&appName=WebProjectsCluster')
-  ],
+  imports: [DatabaseModule, UsersModule],
 })
-export class AppModule { }
+export class AppModule {}
