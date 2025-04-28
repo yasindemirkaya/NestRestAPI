@@ -26,6 +26,9 @@ export class User {
   @Prop({ default: false })
   is_verified: boolean;
 
+  @Prop({ required: true, enum: [0, 1, 2], default: 0 })
+  role: number;
+
   @Prop({ default: null })
   created_by: string;
 

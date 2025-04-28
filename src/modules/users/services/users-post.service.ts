@@ -39,6 +39,7 @@ export class UsersPostService {
         password: hashedPassword,
         is_active: true,
         is_verified: false,
+        role: 0,
         created_at: new Date(),
         updated_at: new Date(),
       });
