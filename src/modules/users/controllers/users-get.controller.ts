@@ -5,6 +5,7 @@ import { UsersGetService } from '../services/users-get.service';
 export class UsersGetController {
   constructor(private readonly usersGetService: UsersGetService) {}
 
+  // GET ALL USERS
   @Get()
   async getAllUsers(
     @Query('page') page: number = 1,
