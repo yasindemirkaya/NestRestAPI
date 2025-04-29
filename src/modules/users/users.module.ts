@@ -5,10 +5,12 @@ import { JwtModule } from '@nestjs/jwt';
 // Controllers
 import { UsersGetController } from './controllers/users-get.controller';
 import { UsersPostController } from './controllers/users-post.controller';
+import { UsersDeleteController } from './controllers/users-delete.controller';
 
 // Services
 import { UsersGetService } from './services/users-get.service';
 import { UsersPostService } from './services/users-post.service';
+import { UsersDeleteService } from './services/users-delete.service';
 
 // Schemas
 import { User, UserSchema } from './schemas/user.schema';
@@ -21,7 +23,7 @@ import { User, UserSchema } from './schemas/user.schema';
       signOptions: { expiresIn: '60s' },
     }),
   ],
-  controllers: [UsersGetController, UsersPostController],
-  providers: [UsersGetService, UsersPostService],
+  controllers: [UsersGetController, UsersPostController, UsersDeleteController],
+  providers: [UsersGetService, UsersPostService, UsersDeleteService],
 })
 export class UsersModule {}

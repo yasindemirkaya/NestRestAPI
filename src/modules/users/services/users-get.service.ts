@@ -37,7 +37,7 @@ export class UsersGetService {
     // Find and return the user by ID
     const user = await this.userModel.findById(id).exec();
     if (!user) {
-      throw new Error('User not found');
+      return null;
     }
     return user;
   }
