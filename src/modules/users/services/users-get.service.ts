@@ -25,4 +25,20 @@ export class UsersGetService {
     const users = await this.userModel.find(query).skip(skip).limit(limit);
     return users;
   }
+  ////////////////////////////////////////////////
+
+  /////////////////////////////////////////////////
+  //
+  // GET USER BY ID
+  // Parameters: id (user id)
+  //
+  ////////////////////////////////////////////////
+  async getUserById(id: string) {
+    // Find and return the user by ID
+    const user = await this.userModel.findById(id).exec();
+    if (!user) {
+      throw new Error('User not found');
+    }
+    return user;
+  }
 }
