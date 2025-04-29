@@ -13,10 +13,16 @@ export class UsersGetService {
   // Parameters: page, limit
   //
   ////////////////////////////////////////////////
-  async getAllUsers(page: number, limit: number) {
+  async getAllUsers(page: number, limit: number, role: number) {
     const skip = (page - 1) * limit;
-    const users = await this.userModel.find().skip(skip).limit(limit);
 
+    let query = {};
+    // If requesters are Admin (1), they are only allowed to see role: 0 and 1 users.
+    if (role === 1) {
+      query = { role: { $in: [0, 1] } };
+    }
+
+    const users = await this.userModel.find(query).skip(skip).limit(limit);
     return users;
   }
 }

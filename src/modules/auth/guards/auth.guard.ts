@@ -6,14 +6,7 @@ import {
 } from '@nestjs/common';
 import * as jwt from 'jsonwebtoken';
 import { Request } from 'express';
-
-interface JwtPayload {
-  first_name: string;
-  last_name: string;
-  email: string;
-  id: string;
-  role: number;
-}
+import { JwtPayload } from '../interfaces/jwt-payload.interface';
 
 interface RequestWithUser extends Request {
   user: JwtPayload;
