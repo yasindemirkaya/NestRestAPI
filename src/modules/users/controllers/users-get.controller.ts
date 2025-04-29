@@ -15,6 +15,7 @@ interface User {
 export class UsersGetController {
   constructor(private readonly usersGetService: UsersGetService) {}
 
+  ////////////////////////////////////////////////////
   // GET ALL USERS (Private)
   // Authorization and Authentication needed.
   ////////////////////////////////////////////////////
@@ -39,9 +40,9 @@ export class UsersGetController {
       limit: limit,
     };
   }
-  ////////////////////////////////////////////////////
 
-  // GET USER BY ID
+  ////////////////////////////////////////////////////
+  // GET USER BY ID (Private)
   // Authorization and Authentication needed.
   ////////////////////////////////////////////////////
   @UseGuards(AuthGuard, RolesGuard)
@@ -65,7 +66,7 @@ export class UsersGetController {
     // Role (1) Admin cannot view role 2 users
     if (
       role === JwtRole.ADMIN &&
-      (await this.usersGetService.getUserById(id)).role ===
+      (await this.usersGetService.getUserById(id))?.role ===
         Number(JwtRole.SUPER_ADMIN)
     ) {
       return {
@@ -75,15 +76,23 @@ export class UsersGetController {
       };
     }
 
-    // Kullanıcıyı çek
+    // Find user with the requested ID
     const user = await this.usersGetService.getUserById(id);
 
-    // Response yapısını oluştur
+    // If there is no user, return error
+    if (!user) {
+      return {
+        code: 0,
+        message: 'User not found.',
+        data: null, // false yerine null döndürüyoruz
+      };
+    }
+
+    // Return success
     return {
       code: 1,
       message: 'User fetched successfully',
       data: user,
     };
   }
-  ////////////////////////////////////////////////////
 }
